@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package rpc_demo.nice;
 
-service Greeter{
+service Greeter {
     rpc SayHello (HelloRequest) returns (HelloResponse);
 }
 
@@ -13,3 +13,24 @@ message HelloRequest {
 message HelloResponse {
     string message = 1;
 }
+
+service RouteGuide {
+    rpc GetFeature (Point) returns (Feature);
+    rpc ListFeatures (Rectangle) returns (stream Feature);
+    rpc RecordRoute (stream Point) returns (RouteSummary);
+    rpc RouteChat (stream RouteNote) returns (stream RouteNote);
+}
+
+
+message Point {
+    int32 latitude = 1;
+    int32 longitude = 2;
+}
+
+message Rectangle {}
+message Feature {
+    string name = 1;
+    Point location = 2;
+}
+message RouteSummary {}
+message RouteNote {}

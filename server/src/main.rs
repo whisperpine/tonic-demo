@@ -2,11 +2,16 @@ mod proto {
     tonic::include_proto!("rpc_demo.nice");
 }
 
+#[cfg(test)]
+mod tests;
+
+pub mod greeter;
+pub mod route_guide;
+pub mod route_guide_db;
+
 use anyhow::Result;
-use proto::greeter_server::{Greeter, GreeterServer};
-use proto::{HelloRequest, HelloResponse};
+use proto::greeter_server::GreeterServer;
 use tonic::transport::Server;
-use tonic::{Request, Response, Status};
 use tracing::{debug, info};
 
 #[tokio::main]
@@ -33,7 +38,7 @@ fn init_tracing_subscriber() {
 }
 
 async fn serve() -> Result<()> {
-    let greeter = MyGreeter::default();
+    let greeter = greeter::GreeterService::default();
     let addr = std::net::SocketAddr::from(([127, 0, 0, 1], 6000));
     debug!("listening at {}", addr);
 
@@ -43,23 +48,4 @@ async fn serve() -> Result<()> {
         .await?;
 
     Ok(())
-}
-
-#[derive(Default)]
-struct MyGreeter;
-
-#[tonic::async_trait]
-impl Greeter for MyGreeter {
-    async fn say_hello(
-        &self,
-        request: Request<HelloRequest>,
-    ) -> Result<Response<HelloResponse>, Status> {
-        let hello_request = request.into_inner();
-        debug!(?hello_request);
-
-        let response = Response::new(HelloResponse {
-            message: format!("Hello {}", hello_request.name),
-        });
-        Ok(response)
-    }
 }
