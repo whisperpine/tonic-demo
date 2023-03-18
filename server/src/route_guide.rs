@@ -30,7 +30,8 @@ impl RouteGuide for RouteGuideService {
             }
         }
 
-        Ok(Response::new(Feature::default()))
+        let status = Status::new(tonic::Code::NotFound, "given point not found");
+        Err(status)
     }
 
     /// Server streaming response type for the ListFeatures method.
@@ -73,9 +74,9 @@ impl RouteGuide for RouteGuideService {
                 }
             }
 
-            if let Some(last) = last_point {
-                summary.distance += calc_distance(&last, &point);
-            }
+            // if let Some(last) = last_point {
+            //     summary.distance += calc_distance(&last, &point);
+            // }
 
             last_point = Some(point);
         }
