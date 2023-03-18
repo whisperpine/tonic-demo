@@ -11,6 +11,7 @@ pub mod route_guide_db;
 
 use anyhow::Result;
 use proto::greeter_server::GreeterServer;
+use proto::route_guide_server::RouteGuideServer;
 use tonic::transport::Server;
 use tracing::{debug, info};
 
@@ -38,12 +39,15 @@ fn init_tracing_subscriber() {
 }
 
 async fn serve() -> Result<()> {
-    let greeter = greeter::GreeterService::default();
     let addr = std::net::SocketAddr::from(([127, 0, 0, 1], 6000));
     debug!("listening at {}", addr);
 
+    let greeter = greeter::GreeterService::default();
+    let route_guide = route_guide::RouteGuideService::new(route_guide_db::load()?);
+
     Server::builder()
         .add_service(GreeterServer::new(greeter))
+        .add_service(RouteGuideServer::new(route_guide))
         .serve(addr)
         .await?;
 
