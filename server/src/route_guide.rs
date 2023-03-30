@@ -61,7 +61,7 @@ impl RouteGuide for RouteGuideService {
     ) -> Result<Response<RouteSummary>, Status> {
         let mut stream = request.into_inner();
         let mut summary = RouteSummary::default();
-        let mut last_point = None;
+        // let mut last_point = None;
         let now = std::time::Instant::now();
 
         while let Some(point) = stream.next().await {
@@ -78,7 +78,7 @@ impl RouteGuide for RouteGuideService {
             //     summary.distance += calc_distance(&last, &point);
             // }
 
-            last_point = Some(point);
+            // last_point = Some(point);
         }
 
         summary.elapsed_time = now.elapsed().as_secs_f32();
