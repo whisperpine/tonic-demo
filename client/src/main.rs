@@ -26,7 +26,7 @@ fn init_tracing_subscriber() {
     tracing_subscriber::registry()
         .with(
             tracing_subscriber::EnvFilter::try_from_default_env()
-                .unwrap_or_else(|_| "client=debug".into()),
+                .unwrap_or_else(|_| "tonic_demo_client=debug".into()),
         )
         .with(tracing_subscriber::fmt::layer())
         .init();
