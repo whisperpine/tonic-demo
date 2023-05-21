@@ -20,6 +20,6 @@ serde = { version = "1.0.156", features = ["derive"] }
 serde_json = "1.0.94"
 tokio = { version = "1.26.0", features = ["full"] }
 tokio-stream = "0.1.12"
-tonic = "0.8.3"
+tonic = "0.9.2"
 tracing = "0.1.37"
 tracing-subscriber = { version = "0.3.16", features = ["env-filter"] }
