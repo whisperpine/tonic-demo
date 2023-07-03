@@ -17,7 +17,7 @@ struct Location {
 
 pub fn load() -> Result<Vec<crate::proto::Feature>> {
     let path = PathBuf::from_iter([env!("CARGO_MANIFEST_DIR"), "data/route_guide_db.json"]);
-    let json_file = std::fs::File::open(&path)?;
+    let json_file = std::fs::File::open(path)?;
     let features: Vec<Feature> = serde_json::from_reader(json_file)?;
 
     let decoded = features
