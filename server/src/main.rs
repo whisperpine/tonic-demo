@@ -42,7 +42,7 @@ async fn serve() -> Result<()> {
     let addr = std::net::SocketAddr::from(([127, 0, 0, 1], 6000));
     debug!("listening at {}", addr);
 
-    let greeter = greeter::GreeterService::default();
+    let greeter = greeter::GreeterService;
     let route_guide = route_guide::RouteGuideService::new(route_guide_db::load()?);
 
     Server::builder()
