@@ -1,6 +1,3 @@
-#![allow(dead_code)]
-#![allow(unused_variables)]
-
 use crate::proto::route_guide_server::RouteGuide;
 use crate::proto::{Feature, Point, Rectangle, RouteNote, RouteSummary};
 use std::sync::Arc;
@@ -146,6 +143,7 @@ fn in_range(feature: &Feature, rectangle: &Rectangle) -> bool {
     false
 }
 
+#[allow(dead_code)]
 #[must_use = "returned value must be used"]
 fn calc_distance(point_a: &Point, point_b: &Point) -> u32 {
     let powered_dist = (point_a.latitude - point_b.latitude).pow(2)

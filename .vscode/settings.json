@@ -1,5 +1,11 @@
 {
+    "files.associations": {
+        "LICENSE": "plain text"
+    },
+    "files.readonlyInclude": {
+        "LICENSE": true
+    },
     "cSpell.words": [
         "rngs"
-    ]
+    ],
 }

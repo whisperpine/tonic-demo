@@ -1,3 +1,9 @@
 [workspace]
 resolver = "2"
 members = ["client", "server"]
+
+[workspace.package]
+edition = "2021"
+version = "0.1.0"
+authors = ["Yusong Lai <yusong.lai@icloud.com>"]
+readme = "README.md"
