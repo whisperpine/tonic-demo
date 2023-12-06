@@ -7,3 +7,4 @@ edition = "2021"
 version = "0.1.0"
 authors = ["Yusong Lai <yusong.lai@icloud.com>"]
 readme = "README.md"
+license = "MIT OR Apache-2.0"
