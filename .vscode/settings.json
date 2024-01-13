@@ -9,6 +9,7 @@
         "target/**": true
     },
     "cSpell.words": [
+        "protoc",
         "rngs"
     ],
 }
