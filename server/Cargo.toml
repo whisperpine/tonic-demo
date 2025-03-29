@@ -1,28 +1,29 @@
 [package]
-name = "tonic_demo_server"
-edition.workspace = true
-authors.workspace = true
-readme.workspace = true
+name = "tserver"
 version.workspace = true
+readme.workspace = true
+authors.workspace = true
+repository.workspace = true
 license.workspace = true
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+edition.workspace = true
 
 [[bin]]
-name = "tonic_demo_server"
+name = "tserver"
 path = "src/main.rs"
 
 [build-dependencies]
-tonic-build = "0.11.0"
+tonic-build.workspace = true
 
 [dependencies]
-anyhow = "1.0.82"
-async-stream = "0.3.5"
-prost = "0.12.4"
-serde = { version = "1.0.197", features = ["derive"] }
-serde_json = "1.0.115"
-tokio = { version = "1.37.0", features = ["full"] }
-tokio-stream = "0.1.15"
-tonic = "0.11.0"
-tracing = "0.1.40"
-tracing-subscriber = { version = "0.3.18", features = ["env-filter"] }
+anyhow.workspace = true
+prost.workspace = true
+tonic.workspace = true
+tracing.workspace = true
+tracing-subscriber.workspace = true
+tokio.workspace = true
+tokio-stream.workspace = true
+serde = { version = "1.0.219", features = ["derive"] }
+serde_json = "1.0.140"
+
+[lints]
+workspace = true

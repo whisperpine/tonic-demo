@@ -95,7 +95,7 @@ impl RouteGuide for RouteGuideService {
 
         while let Some(note) = stream.next().await {
             let note = note?;
-            let location = note.location.clone().unwrap();
+            let location = note.location.unwrap();
             let location_notes = notes.entry(location).or_insert(vec![]);
             location_notes.push(note);
         }
@@ -143,7 +143,7 @@ fn in_range(feature: &Feature, rectangle: &Rectangle) -> bool {
     false
 }
 
-#[allow(dead_code)]
+#[expect(dead_code)]
 #[must_use = "returned value must be used"]
 fn calc_distance(point_a: &Point, point_b: &Point) -> u32 {
     let powered_dist = (point_a.latitude - point_b.latitude).pow(2)

@@ -3,7 +3,7 @@ use crate::proto::{HelloRequest, HelloResponse};
 use anyhow::Result;
 use tonic::{Request, Response, Status};
 
-#[derive(Default)]
+#[derive(Debug, Default)]
 pub struct GreeterService;
 
 #[tonic::async_trait]

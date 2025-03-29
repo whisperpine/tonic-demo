@@ -1,9 +1,6 @@
-type BoxError = Box<dyn std::error::Error>;
-
-fn main() -> Result<(), BoxError> {
+fn main() {
     tonic_build::configure()
         .build_client(false)
-        .compile(&["../proto/nice.proto"], &["../proto"])?;
-
-    Ok(())
+        .compile_protos(&["../proto/nice.proto"], &["../proto"])
+        .unwrap();
 }
