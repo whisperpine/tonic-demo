@@ -5,7 +5,7 @@ members = ["client", "server"]
 [workspace.package]
 version = "0.1.0-alpha"
 readme = "README.md"
-authors = ["Yusong Lai <yusong.lai@icloud.com>"]
+authors = ["Yusong Lai <yusonglai64@gmail.com>"]
 repository = "https://github.com/whisperpine/tonic-demo"
 license = "MIT OR Apache-2.0"
 edition = "2024"
