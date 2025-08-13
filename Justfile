@@ -1,5 +1,5 @@
 server:
-    cargo run -p tserver
+  cargo run -p tserver
 
 client:
-    cargo run -p tclient
+  cargo run -p tclient
