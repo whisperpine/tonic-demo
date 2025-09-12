@@ -1,4 +1,4 @@
-# README
+# Tonic Demo
 
 Demo project for [tonic](https://github.com/hyperium/tonic) based RPC.
 
