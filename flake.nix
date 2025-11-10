@@ -57,13 +57,21 @@
         { pkgs }:
         {
           default = pkgs.mkShell {
+            # The Nix packages installed in the dev environment.
             packages = with pkgs; [
               rustToolchain
               cargo-edit # managing cargo dependencies
               bacon # background code checker
               just # just a command runner
-              protobuf
+              protobuf # protocol buffer
             ];
+            # The shell script executed when the environment is activated.
+            shellHook = ''
+              # Print the last modified date of "flake.lock".
+              stat flake.lock | grep "Modify" |
+                awk '{printf "\"flake.lock\" last modified on: %s", $2}' &&
+                echo " ($((($(date +%s) - $(stat -c %Y flake.lock)) / 86400)) days ago)"
+            '';
           };
         }
       );
