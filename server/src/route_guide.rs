@@ -1,8 +1,8 @@
 use crate::proto::route_guide_server::RouteGuide;
 use crate::proto::{Feature, Point, Rectangle, RouteNote, RouteSummary};
 use std::sync::Arc;
-use tokio_stream::wrappers::ReceiverStream;
 use tokio_stream::StreamExt;
+use tokio_stream::wrappers::ReceiverStream;
 use tonic::{Request, Response, Status, Streaming};
 
 #[derive(Debug)]
@@ -11,6 +11,7 @@ pub struct RouteGuideService {
 }
 
 impl RouteGuideService {
+    #[must_use]
     pub fn new(features: Vec<Feature>) -> Self {
         Self {
             features: Arc::new(features),
@@ -31,7 +32,7 @@ impl RouteGuide for RouteGuideService {
         Err(status)
     }
 
-    /// Server streaming response type for the ListFeatures method.
+    /// Server streaming response type for the `ListFeatures` method.
     type ListFeaturesStream = ReceiverStream<Result<Feature, Status>>;
 
     async fn list_features(
@@ -83,7 +84,7 @@ impl RouteGuide for RouteGuideService {
         Ok(Response::new(summary))
     }
 
-    /// Server streaming response type for the RouteChat method.
+    /// Server streaming response type for the `RouteChat` method.
     type RouteChatStream = ReceiverStream<Result<RouteNote, Status>>;
 
     async fn route_chat(
@@ -143,9 +144,14 @@ fn in_range(feature: &Feature, rectangle: &Rectangle) -> bool {
     false
 }
 
-#[expect(dead_code)]
+#[expect(
+    dead_code,
+    clippy::cast_possible_truncation,
+    clippy::cast_sign_loss,
+    clippy::cast_precision_loss
+)]
 #[must_use = "returned value must be used"]
-fn calc_distance(point_a: &Point, point_b: &Point) -> u32 {
+fn calc_distance(point_a: Point, point_b: Point) -> u32 {
     let powered_dist = (point_a.latitude - point_b.latitude).pow(2)
         + (point_a.longitude - point_b.longitude).pow(2);
 
