@@ -1,10 +1,8 @@
-// rustc
-#![cfg_attr(debug_assertions, allow(unused))]
-// #![cfg_attr(not(debug_assertions), deny(missing_docs))]
-// #![cfg_attr(not(debug_assertions), deny(clippy::unwrap_used))]
-#![cfg_attr(not(debug_assertions), deny(warnings))]
-// clippy
-#![cfg_attr(not(debug_assertions), deny(clippy::todo))]
+#![cfg_attr(
+    not(debug_assertions),
+    deny(warnings, missing_docs),
+    deny(clippy::todo, clippy::unwrap_used)
+)]
 #![cfg_attr(
     not(any(test, debug_assertions)),
     deny(clippy::print_stdout, clippy::dbg_macro)
@@ -17,7 +15,7 @@ pub mod proto {
 use anyhow::Result;
 use proto::route_guide_client::RouteGuideClient;
 use proto::{Point, Rectangle};
-use tonic::{transport::Channel, Request};
+use tonic::{Request, transport::Channel};
 use tracing::{debug, info};
 
 const ENDPOINT: &str = "http://127.0.0.1:6000";
@@ -47,8 +45,8 @@ fn init_tracing_subscriber() {
 }
 
 async fn rpc_say_hello() -> Result<()> {
-    use proto::greeter_client::GreeterClient;
     use proto::HelloRequest;
+    use proto::greeter_client::GreeterClient;
 
     let mut client = GreeterClient::connect(ENDPOINT).await?;
     debug!("connected to {}", ENDPOINT);
@@ -76,7 +74,7 @@ async fn rpc_route_guide() -> Result<()> {
     Ok(())
 }
 
-#[expect(dead_code)]
+#[expect(dead_code, clippy::unreadable_literal)]
 async fn get_feature(client: &mut RouteGuideClient<Channel>) -> Result<()> {
     let request = Request::new(Point {
         latitude: 408122808,
@@ -96,7 +94,7 @@ async fn get_feature(client: &mut RouteGuideClient<Channel>) -> Result<()> {
     Ok(())
 }
 
-#[expect(dead_code)]
+#[expect(dead_code, clippy::unreadable_literal)]
 async fn list_features(client: &mut RouteGuideClient<Channel>) -> Result<()> {
     let request = Request::new(Rectangle {
         corner_one: Some(Point {
@@ -119,8 +117,8 @@ async fn list_features(client: &mut RouteGuideClient<Channel>) -> Result<()> {
 }
 
 async fn record_route(client: &mut RouteGuideClient<Channel>) -> Result<()> {
-    use rand::rngs::ThreadRng;
     use rand::Rng;
+    use rand::rngs::ThreadRng;
 
     fn random_point(rng: &mut ThreadRng) -> Point {
         let latitude = (rng.random_range(0..180) - 90) * 10_000_000;
